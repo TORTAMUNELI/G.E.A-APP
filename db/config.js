@@ -3,10 +3,12 @@ const URL_DB = process.env.MONGODB_CNN;
 
 const dbConnection = async () => {
     try {
+
         await mongoose.connect(URL_DB, {
             useNewUrlParser: true,
             useUnifiedTopology: true,
         });
+
         console.log('Base de datos online');
     } catch (error) {
         console.log(error);

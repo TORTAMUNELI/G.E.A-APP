@@ -1,5 +1,6 @@
 const cors = require('cors');
 const express = require('express');
+const fileUpload = require('express-fileupload');
 
 const { dbConnection } = require('../db/config');
 
@@ -10,7 +11,9 @@ class Server {
         this.port = process.env.PORT;
 
         this.paths = {
-            usuarios: '/usuarios'
+            auth: '/auth',
+            usuarios: '/usuarios',
+            rol: '/rol',
         };
 
         //Conectar a la base de datos
@@ -21,6 +24,13 @@ class Server {
 
         //Rutas de la aplicación
         this.routes();
+
+        //Fileupload - Carga de archivos
+        this.app.use(fileUpload({
+            useTempFiles: true,
+            tempFileDir: '/tmp/',
+            createParentPath: true
+        }));
     }
 
     middleWares() {
@@ -40,6 +50,8 @@ class Server {
 
     routes() {
         this.app.use(this.paths.usuarios, require('../routes/usuarios'));
+        this.app.use(this.paths.auth, require('../routes/auth'));
+        this.app.use(this.paths.rol, require('../routes/rol'));
     }
 
     listen() {
