@@ -1,5 +1,6 @@
 const { Schema, model } = require('mongoose');
 
+//Representacion de la colección 'rols'
 const RolSchema = Schema({
     nombre: {
         type: String,
@@ -11,6 +12,17 @@ const RolSchema = Schema({
     }
 });
 
+
+/**
+ *
+ * Cambiar la impresión de cada rol
+ *
+ * {
+ * nombre: String
+ * estado: Boolean
+ * uid: Mongo.Id
+ * }
+ */
 RolSchema.methods.toJSON = function () {
     const { __v, _id, ...rol } = this.toObject();
     rol.uid = _id;

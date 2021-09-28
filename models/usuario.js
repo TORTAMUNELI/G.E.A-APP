@@ -1,5 +1,6 @@
 const { Schema, model } = require('mongoose');
 
+//Representación de la colección 'usuarios'
 const UsuarioSchema = Schema({
     nombre: {
         type: String,
@@ -28,8 +29,21 @@ const UsuarioSchema = Schema({
     }
 });
 
+/**
+ *
+ * Cambiar la impresión de cada usuario
+ *
+ * {
+ * nombre: String
+ * correo: String
+ * rol: Mongo.Id
+ * img: String
+ * estado: Boolean
+ * uid: Mongo.Id
+ * }
+ */
 UsuarioSchema.methods.toJSON = function () {
-    const { __v, _id, ...usuario } = this.toObject();
+    const { __v, _id, contrasenia, ...usuario } = this.toObject();
     usuario.uid = _id;
     return usuario;
 }

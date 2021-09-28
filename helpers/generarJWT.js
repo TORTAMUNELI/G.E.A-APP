@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 
+//Generar JSON Web Token a partir de un id de mongo y una clave secreta
 const generarJWT = (uid = '') => {
     return new Promise((resolve, reject) => {
         const payload = { uid };

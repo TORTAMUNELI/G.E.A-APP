@@ -8,8 +8,11 @@ class Server {
 
     constructor() {
         this.app = express();
+
+        //Puerto por donde va a estar recibiendo peticiones
         this.port = process.env.PORT;
 
+        //PATHS DE LA APP
         this.paths = {
             auth: '/auth',
             usuarios: '/usuarios',
@@ -37,23 +40,29 @@ class Server {
         //Directorio público
         this.app.use(express.static('public'));
 
-        //CORS
+        //CORS (Evita injecciones SQL)
         this.app.use(cors());
 
         //Lectura y parseo del body
         this.app.use(express.json());
     }
 
+    //Conectar la base de datos
     async conectarDB() {
         await dbConnection();
     }
 
+    /**
+     * Define lo que va a hacer cada ruta
+     * this.app.use(this.paths.{path}, require{'/path/{controller}'})
+     */
     routes() {
         this.app.use(this.paths.usuarios, require('../routes/usuarios'));
         this.app.use(this.paths.auth, require('../routes/auth'));
         this.app.use(this.paths.rol, require('../routes/rol'));
     }
 
+    //Subir el servidor
     listen() {
         this.app.listen(this.port, () => {
             console.log(`El servidor esta corriendo en el puerto ${this.port}`);
