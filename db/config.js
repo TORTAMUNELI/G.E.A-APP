@@ -1,9 +1,11 @@
 const mongoose = require('mongoose');
+
+//URL para conectarse al cluster de mongo
 const URL_DB = process.env.MONGODB_CNN;
 
+//Conectar a la base de datos
 const dbConnection = async () => {
     try {
-
         await mongoose.connect(URL_DB, {
             useNewUrlParser: true,
             useUnifiedTopology: true,
@@ -16,6 +18,7 @@ const dbConnection = async () => {
     }
 }
 
+//Exportar conexión
 module.exports = {
     dbConnection
 }
