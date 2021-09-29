@@ -11,8 +11,9 @@ const {
 } = require('../helpers');
 
 const {
-    validarCampos
-} = require('../middlewares/');
+    validarCampos,
+    validarJWT,
+    esAdmin } = require('../middlewares/');
 
 //Organiza las rutas que va a el path de rol
 const router = Router();
@@ -20,11 +21,15 @@ const router = Router();
 /**
  * Obtener un usuario dado un id que se pasa como parámetro
  * Verifica:
- * 1. Que el id sea de tipo Mongo
+ * 1. JWT
+ * 2. Que el usuario que realiza la búsqueda sea ADMIN
+ * 3. Que el id sea de tipo Mongo
  *
  * Luego pasa a la función de usuariosGet (Se encuentra en los controllers)
  */
 router.get('/:id', [
+    validarJWT,
+    esAdmin,
     check('id', 'No es un id válido').isMongoId(),
     validarCampos
 ], usuariosGet);

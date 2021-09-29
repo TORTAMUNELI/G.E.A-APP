@@ -1,4 +1,4 @@
-const { Rol, Usuario } = require("../models")
+const { Rol, Usuario, Tarea } = require("../models")
 
 //Validar si el rol existe en la BBDD
 const esRolValido = async (rol = '') => {
@@ -18,8 +18,17 @@ const emailExiste = async (correo = '') => {
     }
 }
 
+//Verificar si la actividad existe
+const actividadExiste = async (id = '') => {
+    const existeActividad = await Tarea.findById(id);
+    if (!existeActividad) {
+        throw new Error('La actividad no existe');
+    }
+}
+
 //Exportar funciones
 module.exports = {
     esRolValido,
-    emailExiste
+    emailExiste,
+    actividadExiste
 }

@@ -17,6 +17,7 @@ class Server {
             auth: '/auth',
             usuarios: '/usuarios',
             rol: '/rol',
+            tarea: '/tarea'
         };
 
         //Conectar a la base de datos
@@ -54,12 +55,13 @@ class Server {
 
     /**
      * Define lo que va a hacer cada ruta
-     * this.app.use(this.paths.{path}, require{'/path/{controller}'})
+     * this.app.use(this.paths.{path}, require{'/{controller}'})
      */
     routes() {
         this.app.use(this.paths.usuarios, require('../routes/usuarios'));
         this.app.use(this.paths.auth, require('../routes/auth'));
         this.app.use(this.paths.rol, require('../routes/rol'));
+        this.app.use(this.paths.tarea, require('../routes/tarea'));
     }
 
     //Subir el servidor
