@@ -16,10 +16,6 @@ const router = Router();
  * 1. JWT
  * 2. Que su rol sea ADMIN
  */
-router.get('/', [
-    validarJWT,
-    esAdmin,
-    validarCampos
-], rolesGet);
+router.get('/', [], rolesGet);
 
 module.exports = router;
