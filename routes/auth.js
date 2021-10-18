@@ -2,7 +2,7 @@ const { Router } = require('express');
 const { check } = require('express-validator');
 const { validarCampos } = require('../middlewares/');
 
-const { login } = require('../controllers/auth');
+const { login, validarEstadoJWT } = require('../controllers/auth');
 
 //Organiza las rutas que va a el path de auth
 const router = Router();
@@ -20,5 +20,10 @@ router.post('/login', [
     check('contrasenia', 'La contraseña es obligatoria').not().isEmpty(),
     validarCampos
 ], login);
+
+/**
+ * Validar el estado de un JWT
+ */
+router.get('/', [], validarEstadoJWT);
 
 module.exports = router;
