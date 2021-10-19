@@ -89,9 +89,9 @@ const validarEstadoJWT = async (req = request, res = response) => {
             });
         }
 
-        res.json(
-            usuarioAuth
-        );
+        res.json({
+            estado: true
+        });
 
     } catch (error) {
         res.status(401).json({
