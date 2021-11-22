@@ -14,7 +14,7 @@ const tareasGetByUser = async (req = request, res = response) => {
 
     //Query de búsqueda
     const query = {
-        id,
+        id_usuario: id,
         estado: true
     }
 
