@@ -13,7 +13,8 @@ const {
     tareaGet,
     tareaPut,
     tareaDelete,
-    tareaPost } = require('../controllers/tarea');
+    tareaPost,
+    tareaGetGif } = require('../controllers/tarea');
 
 //Organiza las rutas que van a el path de tarea
 const router = Router();
@@ -95,5 +96,7 @@ router.delete('/:id', [
     check('id').custom((id) => actividadExiste(id)),
     validarCampos
 ], tareaDelete);
+
+router.get('/gif', [], tareaGetGif);
 
 module.exports = router;

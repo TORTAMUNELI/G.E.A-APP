@@ -139,10 +139,25 @@ const tareaDelete = async (req = request, res = response) => {
     });
 }
 
+const tareaGetGif = async () => {
+
+    const url = `https://api.giphy.com/v1/gifs/random?api_key=56EdCEwnWBUblemnPPTKrzGFFS7q5SFL`;
+    const resp = await fetch(url);
+
+    const { data } = await resp.json();
+
+    return {
+        id: data.id,
+        title: data.title,
+        url: data.images?.downsized_medium.url
+    }
+}
+
 module.exports = {
     tareasGetByUser,
     tareaGet,
     tareaPut,
     tareaDelete,
-    tareaPost
+    tareaPost,
+    tareaGetGif
 }
