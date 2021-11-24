@@ -1,5 +1,6 @@
 const { request, response } = require('express');
 const { Tarea } = require('../models/');
+const axios = require('axios');
 
 /**
  *
@@ -141,15 +142,14 @@ const tareaDelete = async (req = request, res = response) => {
 
 const tareaGetGif = async (req = request, res = response) => {
 
+    console.log("holaaa");
     const url = `https://api.giphy.com/v1/gifs/random?api_key=56EdCEwnWBUblemnPPTKrzGFFS7q5SFL`;
-    const resp = await fetch(url);
-
-    const { data } = await resp.json();
+    const resp = await axios.get(url);
 
     res.json({
-        id: data.id,
-        title: data.title,
-        url: data.images?.downsized_medium.url
+        id: resp.data.data.id,
+        title: resp.data.data.title,
+        url: resp.data.data.images?.downsized_medium.url
     });
 }
 

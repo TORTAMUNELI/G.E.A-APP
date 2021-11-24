@@ -97,6 +97,6 @@ router.delete('/:id', [
     validarCampos
 ], tareaDelete);
 
-router.get('/gif', [], tareaGetGif);
+router.get('/gif', tareaGetGif);
 
 module.exports = router;
